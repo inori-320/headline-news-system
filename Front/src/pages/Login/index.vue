@@ -26,7 +26,7 @@
         ></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="success" @click.native.prevent="login">登录</el-button>
+        <el-button type="success" @click.prevent="login">登录</el-button>
         <el-button type="primary" @click="toRegister">注册</el-button>
       </el-form-item>
     </el-form>

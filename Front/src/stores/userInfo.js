@@ -36,8 +36,6 @@ export const useUserInfoStore = defineStore('userInfo', {
       removeToken()
       this.nickName = ""
       this.uid = ""
-      console.log('1111111111');
-      
     }
 
   },
