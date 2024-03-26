@@ -32,7 +32,6 @@ public class HeadlineServiceImpl extends ServiceImpl<HeadlineMapper, Headline>
     @Override
     public Result findNewsPage(PortalVo portalVo) {
         IPage<Headline> page = new Page<>(portalVo.getPageNum(),portalVo.getPageSize());
-        System.out.println(page.getPages());
         mapper.selectPageMap(page, portalVo);
         Map<String,Object> data = new HashMap<>();
         data.put("pageData", page.getRecords());
