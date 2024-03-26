@@ -1,7 +1,5 @@
 package com.lty.service.impl;
 
-import com.alibaba.druid.util.StringUtils;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -13,11 +11,9 @@ import com.lty.utils.JwtHelper;
 import com.lty.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestHeader;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -71,6 +67,15 @@ public class HeadlineServiceImpl extends ServiceImpl<HeadlineMapper, Headline>
         headline.setUpdateTime(new Date());
         headline.setCreateTime(new Date());
         mapper.insert(headline);
+        return Result.ok(null);
+    }
+
+    @Override
+    public Result update(Headline headline) {
+        int version = mapper.selectById(headline.getHid()).getVersion();
+        headline.setVersion(version);
+        headline.setUpdateTime(new Date());
+        mapper.updateById(headline);
         return Result.ok(null);
     }
 }

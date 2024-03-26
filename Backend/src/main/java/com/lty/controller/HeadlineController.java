@@ -6,6 +6,9 @@ import com.lty.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author lty
  */
@@ -18,5 +21,24 @@ public class HeadlineController {
     @PostMapping("publish")
     public Result publish(@RequestBody Headline headline, @RequestHeader String token){
         return service.publish(headline, token);
+    }
+
+    @PostMapping("findHeadlineByHid")
+    public Result findHeadlineByHid(Integer hid){
+        Headline headline = service.getById(hid);
+        Map<String, Headline> data = new HashMap<>();
+        data.put("headline", headline);
+        return Result.ok(data);
+    }
+
+    @PostMapping("update")
+    public Result update(@RequestBody Headline headline){
+        return service.update(headline);
+    }
+
+    @PostMapping("removeByHid")
+    public Result removeByHid(Integer hid){
+        service.removeById(hid);
+        return Result.ok(null);
     }
 }
