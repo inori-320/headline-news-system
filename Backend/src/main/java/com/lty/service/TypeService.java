@@ -2,6 +2,8 @@ package com.lty.service;
 
 import com.lty.pojo.Type;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.lty.pojo.vo.PortalVo;
+import com.lty.utils.Result;
 
 /**
 * @author 71947
@@ -9,5 +11,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2024-03-25 19:09:17
 */
 public interface TypeService extends IService<Type> {
-
+    Result findAllTypes();
 }

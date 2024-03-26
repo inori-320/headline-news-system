@@ -2,6 +2,8 @@ package com.lty.service;
 
 import com.lty.pojo.Headline;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.lty.pojo.vo.PortalVo;
+import com.lty.utils.Result;
 
 /**
 * @author 71947
@@ -9,5 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2024-03-25 19:09:17
 */
 public interface HeadlineService extends IService<Headline> {
-
+    Result findNewsPage(PortalVo portalVo);
+    Result showHeadlineDetail(Integer hid);
 }

@@ -1,7 +1,16 @@
 package com.lty.mapper;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lty.pojo.Headline;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.lty.pojo.vo.PortalVo;
+import org.apache.ibatis.annotations.MapKey;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Map;
+import java.util.Objects;
 
 /**
 * @author 71947
@@ -10,7 +19,11 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @Entity com.lty.pojo.Headline
 */
 public interface HeadlineMapper extends BaseMapper<Headline> {
+    @MapKey("hid")
+    IPage<Map<String, Object>> selectPageMap(IPage<Headline> page, @Param("portalVo") PortalVo portalVo);
 
+    @MapKey("hid")
+    Map<String, Object> selectDetailMap(Integer hid);
 }
 
 
