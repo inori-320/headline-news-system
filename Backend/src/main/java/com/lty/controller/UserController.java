@@ -35,4 +35,9 @@ public class UserController {
     public Result register(@RequestBody User user){
         return userService.register(user);
     }
+
+    @GetMapping("checkLogin")
+    public Result checkLogin(@RequestHeader String token){
+        return userService.checkLogin(token);
+    }
 }

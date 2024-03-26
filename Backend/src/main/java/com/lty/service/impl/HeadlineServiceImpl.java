@@ -9,10 +9,13 @@ import com.lty.pojo.Headline;
 import com.lty.pojo.vo.PortalVo;
 import com.lty.service.HeadlineService;
 import com.lty.mapper.HeadlineMapper;
+import com.lty.utils.JwtHelper;
 import com.lty.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestHeader;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +30,8 @@ public class HeadlineServiceImpl extends ServiceImpl<HeadlineMapper, Headline>
     implements HeadlineService{
     @Autowired
     private HeadlineMapper mapper;
+    @Autowired
+    private JwtHelper jwt;
 
     @Override
     public Result findNewsPage(PortalVo portalVo) {
@@ -56,6 +61,17 @@ public class HeadlineServiceImpl extends ServiceImpl<HeadlineMapper, Headline>
         Map<String,Object> pageInfoMap=new HashMap<>();
         pageInfoMap.put("headline",headLineDetail);
         return Result.ok(pageInfoMap);
+    }
+
+    @Override
+    public Result publish(Headline headline, String token) {
+        int userId = jwt.getUserId(token).intValue();
+        headline.setPublisher(userId);
+        headline.setPageViews(0);
+        headline.setUpdateTime(new Date());
+        headline.setCreateTime(new Date());
+        mapper.insert(headline);
+        return Result.ok(null);
     }
 }
 
